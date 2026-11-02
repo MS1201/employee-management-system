@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 require('dotenv').config();
 
 const connectDB = require('./config/db');

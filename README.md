@@ -207,37 +207,18 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/MS1201/employee-management-system)
 
-### Blueprint Deployment (Fastest)
-Click the **Deploy to Render** button above, or go to **New +** > **Blueprint** on [dashboard.render.com](https://dashboard.render.com) and select `MS1201/employee-management-system`. Render will automatically deploy both services defined in `render.yaml`.
-1. In the Render Dashboard, click **New +** > **Web Service**.
-2. Connect your GitHub repository: `employee-management-system`.
-3. Configure the service settings:
-   - **Name**: `nexus-ems-backend`
-   - **Root Directory**: `backend`
-   - **Runtime**: `Node`
-   - **Build Command**: `npm install`
-   - **Start Command**: `node server.js`
-   - **Instance Type**: `Free`
-4. Add Environment Variables:
-   - `PORT`: `5000`
-   - `NODE_ENV`: `production`
-   - `MONGODB_URI`: `<Your MongoDB Atlas Connection String>`
-   - `JWT_SECRET`: `<A strong 32+ character random secret>`
-   - `JWT_EXPIRE`: `7d`
-   - `FRONTEND_URL`: `https://nexus-ems.onrender.com` *(Update with your static site domain)*
-5. Click **Create Web Service**. Note the assigned backend URL (e.g. `https://nexus-ems-backend.onrender.com`).
-
-### B. Deploy Frontend (Render Static Site - Free)
-1. In the Render Dashboard, click **New +** > **Static Site**.
-2. Connect the same repository.
+### Frontend Deployment (Render Static Site - Free Tier)
+Deploy the frontend static site with zero backend timeout/memory issues:
+1. In the Render Dashboard, click **New +** > **Static Site** (or use the Blueprint button above).
+2. Connect your repository: `employee-management-system`.
 3. Configure settings:
-   - **Name**: `nexus-ems`
+   - **Name**: `employee-management-system-frontend`
    - **Root Directory**: `frontend`
    - **Build Command**: `npm install && npm run build`
    - **Publish Directory**: `dist`
 4. Add Environment Variable:
-   - `VITE_API_URL`: `https://nexus-ems-backend.onrender.com` *(Your live backend URL)*
-5. Note: SPA routing is pre-configured via `frontend/public/_redirects` (`/*  /index.html  200`).
+   - `VITE_API_URL`: `<Your Backend API URL>` (e.g. `http://localhost:5000` or your deployed API)
+5. SPA routing is pre-configured via `frontend/public/_redirects` (`/*  /index.html  200`).
 6. Click **Create Static Site**.
 
 ---

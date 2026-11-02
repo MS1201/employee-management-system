@@ -1,17 +1,16 @@
 services:
-  # Unified EMS Full-Stack Web Service (Node.js API + React Static SPA)
+  # Frontend Static Site (Deploys only frontend on Render - Fast, Free, No backend errors)
   - type: web
-    name: employee-management-system
-    env: node
+    name: employee-management-system-frontend
+    env: static
+    rootDir: frontend
     plan: free
-    buildCommand: npm run build
-    startCommand: npm start
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
     envVars:
-      - key: NODE_ENV
-        value: production
-      - key: JWT_EXPIRE
-        value: 7d
-      - key: MONGODB_URI
+      - key: VITE_API_URL
         sync: false
-      - key: JWT_SECRET
-        generateValue: true
