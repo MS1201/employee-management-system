@@ -88,9 +88,18 @@ app.use('/api/performance', performanceRoutes);
 app.use('/api/documents', documentRoutes);
 app.use('/api/notifications', notificationRoutes);
 
-// 404
-app.all('*', (req, res) => {
-  res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` });
+// Serve static frontend in production
+const frontendDistPath = path.join(__dirname, '../frontend/dist');
+app.use(express.static(frontendDistPath));
+
+// API 404 handler
+app.all('/api/*', (req, res) => {
+  res.status(404).json({ success: false, message: `API route ${req.originalUrl} not found` });
+});
+
+// SPA fallback for frontend routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendDistPath, 'index.html'));
 });
 
 // Global error handler

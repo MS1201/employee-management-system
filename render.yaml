@@ -1,44 +1,17 @@
 services:
-  # Backend API Web Service
+  # Unified EMS Full-Stack Web Service (Node.js API + React Static SPA)
   - type: web
-    name: nexus-ems-backend
+    name: employee-management-system
     env: node
-    rootDir: backend
     plan: free
-    buildCommand: npm install
-    startCommand: node server.js
+    buildCommand: npm run build
+    startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 5000
       - key: JWT_EXPIRE
         value: 7d
       - key: MONGODB_URI
         sync: false
       - key: JWT_SECRET
         generateValue: true
-      - key: FRONTEND_URL
-        fromStaticSite:
-          name: nexus-ems-frontend
-          property: url
-
-  # Frontend Static Site
-  - type: web
-    name: nexus-ems-frontend
-    env: static
-    rootDir: frontend
-    plan: free
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
-    envVars:
-      - key: VITE_API_URL
-        fromService:
-          type: web
-          name: nexus-ems-backend
-          property: host
-
