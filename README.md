@@ -205,7 +205,10 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ## 🚀 Free Tier Render Deployment Guide
 
-### A. Deploy Backend (Render Web Service - Free)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/MS1201/employee-management-system)
+
+### Blueprint Deployment (Fastest)
+Click the **Deploy to Render** button above, or go to **New +** > **Blueprint** on [dashboard.render.com](https://dashboard.render.com) and select `MS1201/employee-management-system`. Render will automatically deploy both services defined in `render.yaml`.
 1. In the Render Dashboard, click **New +** > **Web Service**.
 2. Connect your GitHub repository: `employee-management-system`.
 3. Configure the service settings:
