@@ -1,23 +1,23 @@
-const express      = require('express');
-const cors         = require('cors');
-const helmet       = require('helmet');
-const morgan       = require('morgan');
-const rateLimit    = require('express-rate-limit');
-const mongoSanitize= require('express-mongo-sanitize');
-const path         = require('path');
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const rateLimit = require('express-rate-limit');
+const mongoSanitize = require('express-mongo-sanitize');
+const path = require('path');
 require('dotenv').config();
 
-const connectDB      = require('./config/db');
-const errorHandler   = require('./middleware/errorHandler');
+const connectDB = require('./config/db');
+const errorHandler = require('./middleware/errorHandler');
 
-const authRoutes         = require('./routes/auth');
-const employeeRoutes     = require('./routes/employees');
-const departmentRoutes   = require('./routes/departments');
-const attendanceRoutes   = require('./routes/attendance');
-const leaveRoutes        = require('./routes/leaves');
-const payrollRoutes      = require('./routes/payroll');
-const performanceRoutes  = require('./routes/performance');
-const documentRoutes     = require('./routes/documents');
+const authRoutes = require('./routes/auth');
+const employeeRoutes = require('./routes/employees');
+const departmentRoutes = require('./routes/departments');
+const attendanceRoutes = require('./routes/attendance');
+const leaveRoutes = require('./routes/leaves');
+const payrollRoutes = require('./routes/payroll');
+const performanceRoutes = require('./routes/performance');
+const documentRoutes = require('./routes/documents');
 const notificationRoutes = require('./routes/notifications');
 
 connectDB();
@@ -46,8 +46,8 @@ app.use(cors({
     callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
-  methods: ['GET','POST','PUT','DELETE','PATCH','OPTIONS'],
-  allowedHeaders: ['Content-Type','Authorization']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json({ limit: '10mb' }));
@@ -78,14 +78,14 @@ app.get('/health', (req, res) => {
 });
 
 // API Routes
-app.use('/api/auth',          authRoutes);
-app.use('/api/employees',     employeeRoutes);
-app.use('/api/departments',   departmentRoutes);
-app.use('/api/attendance',    attendanceRoutes);
-app.use('/api/leaves',        leaveRoutes);
-app.use('/api/payroll',       payrollRoutes);
-app.use('/api/performance',   performanceRoutes);
-app.use('/api/documents',     documentRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/employees', employeeRoutes);
+app.use('/api/departments', departmentRoutes);
+app.use('/api/attendance', attendanceRoutes);
+app.use('/api/leaves', leaveRoutes);
+app.use('/api/payroll', payrollRoutes);
+app.use('/api/performance', performanceRoutes);
+app.use('/api/documents', documentRoutes);
 app.use('/api/notifications', notificationRoutes);
 
 // 404
