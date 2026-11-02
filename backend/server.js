@@ -30,15 +30,17 @@ app.use(helmet({
 }));
 
 // CORS
+const frontendUrl = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.replace(/\/$/, '') : 'http://localhost:5173';
 const allowedOrigins = [
-  process.env.FRONTEND_URL || 'http://localhost:5173',
+  frontendUrl,
   'http://localhost:3000',
   'http://localhost:5173'
 ];
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin) || process.env.NODE_ENV === 'development') {
+    const cleanOrigin = origin.replace(/\/$/, '');
+    if (allowedOrigins.includes(cleanOrigin) || process.env.NODE_ENV === 'development') {
       return callback(null, true);
     }
     callback(new Error('Not allowed by CORS'));
